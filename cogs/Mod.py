@@ -8,19 +8,23 @@ class Mod(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.content == '?closeTicket' or message.content == '?close':
-            pass
-        else:
-            if str(message.channel.type) == 'private':
-                return
+        try:
+            if message.content == '?closeTicket' or message.content == '?close':
+                pass
             else:
-                if message.author == self.bot.user:
+                if str(message.channel.type) == 'private':
                     return
-                
                 else:
-                    user = await message.guild.fetch_member(int(message.channel.name))
-                    embedVar = discord.Embed(title='The Moderators Have Sent You A New Message' , description=message.content, color=0x00ff00) # Blue: 0x0000ff, Red: 0xff0000
-                    await user.send(embed=embedVar)
+                    if message.author == self.bot.user:
+                        return
+                    
+                    else:
+                        user = await message.guild.fetch_member(int(message.channel.name))
+                        embedVar = discord.Embed(title='The Moderators Have Sent You A New Message' , description=message.content, color=0x00ff00) # Blue: 0x0000ff, Red: 0xff0000
+                        await user.send(embed=embedVar)
+
+        except:
+            pass
                 
         await self.bot.process_commands(message)
 
@@ -30,9 +34,9 @@ class Mod(commands.Cog):
     async def closeTicket(self, ctx):
         try:
             member = await ctx.guild.fetch_member(int(ctx.channel.name))
+            await ctx.channel.delete()
             embedVar = discord.Embed(title='The Moderators Have Closed This Thread' , description='') # Blue: 0x0000ff, Red: 0xff0000
             await member.send(embed=embedVar)
-            await ctx.channel.delete()
         except:
             pass
 
