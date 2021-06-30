@@ -8,7 +8,6 @@ class Mod(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        guild = self.bot.get_guild(830592909001621545)
         if message.content == '?closeTicket' or message.content == '?close':
             pass
         else:
@@ -19,7 +18,7 @@ class Mod(commands.Cog):
                     return
                 
                 else:
-                    user = await guild.fetch_member(int(message.channel.name))
+                    user = await message.guild.fetch_member(int(message.channel.name))
                     embedVar = discord.Embed(title='The Moderators Have Sent You A New Message' , description=message.content, color=0x00ff00) # Blue: 0x0000ff, Red: 0xff0000
                     await user.send(embed=embedVar)
                 
