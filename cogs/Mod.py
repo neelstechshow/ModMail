@@ -9,7 +9,7 @@ class Member(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         guild = self.bot.get_guild(830592909001621545)
-        if message.content.startswith('?'):
+        if message.content == '?closeTicket' or message.content == '?close':
             pass
         else:
             if str(message.channel.type) == 'private':
