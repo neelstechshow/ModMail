@@ -30,9 +30,9 @@ class Mod(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def closeTicket(self, ctx):
         try:
-            member = discord.utils.get(self.bot.get_all_members(), id=int(ctx.channel.name))
-            embedVariable = discord.Embed(title='The Moderators Have Closed This Thread' , description='', color=0x00ff00) # Blue: 0x0000ff, Red: 0xff0000
-            await member.send(embed=embedVariable)
+            member = await guild.fetch_member(int(ctx.channel.name))
+            embedVar = discord.Embed(title='The Moderators Have Closed This Thread' , description='', color=0x00ff00) # Blue: 0x0000ff, Red: 0xff0000
+            await member.send(embed=embedVar)
             await ctx.channel.delete()
         except:
             pass
