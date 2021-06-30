@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 
-class Member(commands.Cog):
+class Mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -26,17 +26,17 @@ class Member(commands.Cog):
         await self.bot.process_commands(message)
 
 
-    @commands.command(description='Close A Ticket Using This Command')
+    @commands.command(aliases = ['close'], description='Close A Ticket Using This Command')
     @commands.has_permissions(manage_messages=True)
     async def closeTicket(self, ctx):
         try:
-            user = discord.utils.get(self.bot.get_all_members(), id=int(ctx.channel.name))
+            member = discord.utils.get(self.bot.get_all_members(), id=int(ctx.channel.name))
             embedVariable = discord.Embed(title='The Moderators Have Closed This Thread' , description='', color=0x00ff00) # Blue: 0x0000ff, Red: 0xff0000
-            await user.send(embed=embedVariable)
+            await member.send(embed=embedVariable)
             await ctx.channel.delete()
         except:
             pass
 
 
 def setup(bot):
-    bot.add_cog(Member(bot))
+    bot.add_cog(Mod(bot))
