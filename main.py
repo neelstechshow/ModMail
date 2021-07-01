@@ -4,7 +4,7 @@ import os
 from keep_alive import keep_alive
 
 intents = discord.Intents().all()
-bot = commands.Bot(command_prefix='>', intents=intents )
+bot = commands.Bot(command_prefix='?', intents=intents )
 
 @bot.command()
 @commands.has_permissions(administrator=True)
